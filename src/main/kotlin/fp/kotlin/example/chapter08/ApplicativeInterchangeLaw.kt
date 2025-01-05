@@ -7,8 +7,14 @@ fun main() {
     val x = 10
 
     val maybeAf = Just { a: Int -> a * 2 }
+    val aMaybeAf = AJust {a: Int -> a * 3 }
     val leftMaybe = maybeAf apply Maybe.pure(x)
     val rightMaybe = Maybe.pure(of<Int, Int>(x)) apply maybeAf
+    val rightaMaybe = AMaybe.pure(x) apply aMaybeAf
+
+    println(rightMaybe)
+    println(rightaMaybe)
+
     println(leftMaybe.toString() == rightMaybe.toString())  // true
 
     val treeAf = Node({ a: Int -> a * 2 })

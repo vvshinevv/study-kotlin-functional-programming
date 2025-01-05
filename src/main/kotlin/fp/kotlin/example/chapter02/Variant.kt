@@ -1,6 +1,8 @@
 package fp.kotlin.example.chapter02
 
-interface Box<T>
+interface Box<T> {
+
+}
 
 open class Language
 open class JVM : Language()

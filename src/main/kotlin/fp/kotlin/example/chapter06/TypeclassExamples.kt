@@ -6,7 +6,7 @@ interface Eq<in T> {
 }
 
 interface Print {
-    fun print()
+    fun print() = println("Nothing")
 }
 
 interface Ord<in T>: Eq<T> {
@@ -21,7 +21,6 @@ object Yellow: TrafficLight() {
     override fun print() = print("Yellow")
 }
 object Green: TrafficLight() {
-    override fun print() = print("Green")
 }
 
 sealed class DayOfWeek(private val ord: Int): Ord<DayOfWeek> {

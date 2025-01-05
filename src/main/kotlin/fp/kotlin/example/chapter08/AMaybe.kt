@@ -1,5 +1,7 @@
 package fp.kotlin.example.chapter08
 
+import kotlin.Nothing
+
 fun main() {
     // fmap test
     println(AJust(10).fmap { it + 10 })     // AJust(20)
@@ -7,27 +9,29 @@ fun main() {
 
     // pure test
     println(AMaybe.pure(10))                // AJust(10)
-
-    // apply test
-    println(AJust(10) apply AJust { x: Int -> x * 2 })   // AJust(20)
-    println(ANothing apply AJust { x: Int -> x * 2 })            // ANothing
-    println(AJust(10).apply(AJust { x: Int -> x * 2 }))  // AJust(20)
-
-    // applicative style programming test
+//    println(AJust(0).pure(2))
+//    // apply test
+//    println(AJust(10) apply AJust { x: Int -> x * 2 })   // AJust(20)
+//    println(ANothing apply AJust { x: Int -> x * 2 })            // ANothing
+//    println(AJust(10).apply(AJust { x: Int -> x * 2 }))  // AJust(20)
+//
+//    // applicative style programming test
     println(AMaybe.pure(10)
         apply AJust { x: Int -> x * 2 }
         apply AJust { x: Int -> x + 10 })    // AJust(30)
 
-    //    println(AMaybe.pure({ x: Int -> x * 2 })
-    //            apply AJust(5)
-    //            apply AJust(10))    // compile error
+//        println(AMaybe.pure { x: Int -> x * 2 }
+//                apply AJust(5)
+//                apply AJust(10))    // compile error
 
 }
-
+fun <A, B> apply(ff: AMaybe<(A) -> B>): AMaybe<B> {
+    return ANothing
+}
 sealed class AMaybe<out A> : Applicative<A> {
 
     companion object {
-        fun <V> pure(value: V): Applicative<V> = AJust(0).pure(value)
+        fun <V> pure(value: V): Applicative<V> = AJust("aasdfasdfadf").pure(value)
     }
 
     override fun <V> pure(value: V): Applicative<V> = AJust(value)
